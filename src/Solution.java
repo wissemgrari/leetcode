@@ -1,30 +1,18 @@
+import java.util.HashMap;
 import java.util.Map;
 
 public class Solution {
 
-  public int romanToInt(String s) {
-    Map<Character, Integer> romans = Map.of(
-        'I', 1,
-        'V', 5,
-        'X', 10,
-        'L', 50,
-        'C', 100,
-        'D', 500,
-        'M', 1000
-    );
-
-    int result = 0;
-    int prev = 0;
-
-    for (int i = s.length() - 1; i >= 0; i--) {
-      int current = romans.get(s.charAt(i));
-      if (current < prev) {
-        result -= current;
-      } else {
-        result += current;
+  public int[] twoSum(int[] nums, int target) {
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++) {
+      int diff = target - nums[i];
+      if (map.containsKey(diff)) {
+        return new int[]{i, map.get(diff)};
       }
-      prev = current;
+      map.put(nums[i], i);
+
     }
-    return result;
+    return nums;
   }
 }
