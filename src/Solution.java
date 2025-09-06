@@ -1,17 +1,28 @@
 public class Solution {
 
+  public static void main(String[] args) {
+    Solution s = new Solution();
+    System.out.println(s.longestCommonPrefix(new String[]{"aaa", "aa", "aaa"}));
+    System.out.println(s.longestCommonPrefix(new String[]{"flower", "flow", "flight"}));
+    System.out.println(s.longestCommonPrefix(new String[]{"dog", "racecar"}));
+  }
+
   public String longestCommonPrefix(String[] strs) {
     String first = strs[0];
-    int end = first.length();
-    for (int i = 1; i < strs.length && end > 0; i++) {
-      String s = strs[i];
+    int substring = first.length();
+
+    for (int i = 1; i < strs.length; i++) {
+      int max_iteration = Math.min(substring, strs[i].length());
       int j = 0;
-      int limit = Math.min(end, s.length());
-      while (j < limit && first.charAt(j) == s.charAt(j)) {
+      while (j < max_iteration && first.charAt(j) == strs[i].charAt(j)) {
         j++;
       }
-      end = j;
+      substring = j;
+      // the loop should terminate early if no common prefix exists
+      if (substring == 0) {
+        break;
+      }
     }
-    return first.substring(0, end);
+    return first.substring(0, substring);
   }
 }
